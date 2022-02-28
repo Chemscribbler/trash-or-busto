@@ -1,1 +1,2 @@
 FLASK_APP=app_dzmz.py
+FLASK_ENV=development
