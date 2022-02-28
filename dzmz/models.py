@@ -9,6 +9,7 @@ class Card(db.Model):
     cost = db.Column(db.Integer)
     type = db.Column(db.String, nullable=False)
     rating = db.Column(db.Float, default=1500)
+    num_ratings = db.Column(db.Integer, default=0)
 
     def __repr__(self):
         return f"<Card {self.name}>"
