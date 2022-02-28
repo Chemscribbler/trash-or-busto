@@ -1,0 +1,12 @@
+venv/
+*.pyc
+__pycahche__/
+migrations/
+
+instance/
+
+dist/
+build/
+*.egg-info
+
+app.db
