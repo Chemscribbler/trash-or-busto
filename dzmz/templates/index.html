@@ -1,8 +1,27 @@
 {% extends "base.html" %}
 
 {% block content %}
-<ul>
-    <li style="display: inline;">{{pair[0].name}}</li>
-    <li style="display: inline;">{{pair[1].name}}</li>
-</ul>
+<h1>Which Card is Stronger?</h1>
+<table>
+    <tr>
+        <th>
+            <img src="https://netrunnerdb.com/card_image/large/{{pair[0].nrdb_key}}.jpg" />
+        </th>
+        <th></th>
+        <th>
+            <img src="https://netrunnerdb.com/card_image/large/{{pair[1].nrdb_key}}.jpg" />
+        </th>
+    </tr>
+    <tr>
+        <form action={{ url_for('record_vote', cardzero_id=pair[0].id, cardone_id=pair[1].id )}} method="post">
+            <th><button name='result' , type="submit" , value="card0win">
+                    {{pair[0].name}}
+                </button></th>
+            <th><button name='result' , type="submit" , value="tie">
+                    Tie</button></th>
+            <th><button name='result' , type="submit" , value="card1win">
+                    {{pair[1].name}}</button></th>
+        </form>
+    </tr>
+</table>
 {% endblock %}

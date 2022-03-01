@@ -2,10 +2,14 @@
 
 {% block content %}
 {%if cards %}
-<ul>
+<table>
     {% for card in cards %}
-    <li>{{card.name}}</li>
+    <tr>
+        <td>{{card.name}}</td>
+        <td>{{card.rating|int}}</td>
+        <td>{{card.num_ratings}}</td>
+    </tr>
     {% endfor %}
-</ul>
+</table>
 {% endif %}
 {% endblock %}
