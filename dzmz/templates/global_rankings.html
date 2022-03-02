@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+{%if cards %}
+<table>
+    {% for card in cards %}
+    <tr>
+        <td>{{card.name}}</td>
+        <td>{{card.rating|int}}</td>
+        <td>{{card.num_ratings}}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% endif %}
+{% endblock %}

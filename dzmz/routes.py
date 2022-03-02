@@ -19,7 +19,29 @@ def index():
 @app.route("/ranking")
 def ranking():
     cards = Card.query.order_by(desc("rating")).all()
-    return render_template("rankings.html", title="Rankings", cards=cards)
+    return render_template("global_rankings.html", title="Rankings", cards=cards)
+
+
+@app.route("/rank/faction")
+@app.route("/rank/factions")
+def top_5_factions():
+    factions = Card.query.with_entities(Card.faction).distinct().all()
+    top_cards = {}
+    for faction in factions:
+        faction = faction[0]
+        top_cards[faction] = (
+            Card.query.filter_by(faction=faction)
+            .order_by(desc(Card.rating))
+            .limit(5)
+            .all()
+        )
+    print(top_cards)
+    return render_template("top_five_rankings.html", title="Rankings", cards=top_cards)
+
+
+@app.route("/rank/<string:faction>")
+def faction_rank(faction):
+    cards = Card.query.filter_by(faction=faction).order_by(desc(Card.rating)).all()
 
 
 @app.route("/vote/<int:cardzero_id>-<int:cardone_id>", methods=["POST", "GET"])

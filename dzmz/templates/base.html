@@ -10,10 +10,10 @@
 </head>
 
 <body>
-    <div>
-        DEEZ Optimizer:
-        <a href="{{ url_for('index') }}">Home</a>
-        <a href="{{url_for('ranking')}}">Rankings</a>
+    DEEZ Optimizer:
+    <a href="{{ url_for('index') }}">Home</a>
+    <a href="{{url_for('ranking')}}">All Ranks</a>
+    <a href="{{url_for('top_5_factions')}}">Top 5 by Faction</a>
     </div>
     <hr>
     {% with messages = get_flashed_messages() %}

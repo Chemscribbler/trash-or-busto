@@ -7,7 +7,11 @@ from random import sample, randint
 
 def randomizer():
     cards = Card.query.all()
-    cardzero = sample(cards, 1)[0]
+    try:
+        cardzero = sample(cards, 1)[0]
+    except TypeError as e:
+        print(cardzero)
+        raise e
     if cardzero.num_ratings < 10:
         matches = Card.query.filter_by(
             faction=cardzero.faction, type=cardzero.type
@@ -21,7 +25,16 @@ def randomizer():
             matches = Card.query.filter_by(faction=cardzero.faction).all()
         else:
             return randomizer()
-    cardone = sample(matches, 1)[0]
+    try:
+        cardone = sample(matches, 1)[0]
+    except TypeError as e:
+        print(cardone)
+        raise e
     if cardone.id == cardzero.id:
         return randomizer()
     return [cardzero, cardone]
+
+
+def logger(card, error):
+    with open("log.txt", "a") as f:
+        f.write(f"\n{card}: {error}")

@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block content %}
+{%if cards %}
+<table>
+    <thead>
+        <tr>
+            <th>Faction</th>
+            <th>1st</th>
+            <th>2nd</th>
+            <th>3rd</th>
+            <th>4th</th>
+            <th>5th</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for key, value in cards.items() %}
+        <tr>
+            <td>{{key}}</td>
+            {% for card in value %}
+            <td>{{ card.name }}</td>
+            {% endfor %}
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endif %}
+{% endblock %}
