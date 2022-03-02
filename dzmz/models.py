@@ -14,3 +14,18 @@ class Card(db.Model):
 
     def __repr__(self):
         return f"<Card {self.name}>"
+
+
+class Pair(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    lower_card = db.Column(db.Integer, db.ForeignKey("card.id"))
+    upper_card = db.Column(db.Integer, db.ForeignKey("card.id"))
+    lower_wins = db.Column(db.Integer, default=0)
+    upper_wins = db.Column(db.Integer, default=0)
+    ties = db.Column(db.Integer, default=0)
+
+    def __repr__(self):
+        def pull_id(id):
+            return Card.query.filter_by(id=id).first()
+
+        return f"<Pair {pull_id(self.lower_card)} {pull_id(self.upper_card)}>"

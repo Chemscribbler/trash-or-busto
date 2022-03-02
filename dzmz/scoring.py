@@ -1,4 +1,5 @@
 from dzmz import db
+from dzmz.models import Pair
 
 
 def update_scores(winner=None, loser=None, ties=None):
@@ -43,3 +44,33 @@ def calc_k_fact(card):
         return 20
     else:
         return 10
+
+
+def make_pair(cardzero, cardone):
+    if cardzero.id > cardone.id:
+        lower_card = cardone
+        upper_card = cardzero
+    else:
+        lower_card = cardzero
+        upper_card = cardone
+    p = Pair(
+        id=lower_card.id + upper_card.id,
+        lower_card=lower_card.id,
+        upper_card=upper_card.id,
+    )
+    db.session.add(p)
+    db.session.commit()
+    return p
+
+
+def find_pair(cardzero, cardone):
+    if cardzero.id > cardone.id:
+        lower_card = cardone
+        upper_card = cardzero
+    else:
+        lower_card = cardzero
+        upper_card = cardone
+    p = Pair.query.filter_by(id=lower_card.id + upper_card.id).first()
+    if p is None:
+        p = make_pair(cardzero, cardone)
+    return p
