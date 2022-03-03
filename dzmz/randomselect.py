@@ -32,8 +32,7 @@ def randomizer():
             return randomizer()
     try:
         cardone = sample(matches, 1)[0]
-    except Exception as e:
-        logger(cardone, e)
+    except Exception:
         return randomizer()
     if cardone.id == cardzero.id:
         return randomizer()
