@@ -34,7 +34,19 @@ def top_5_factions():
             .limit(5)
             .all()
         )
-    print(top_cards)
+    # print(top_cards)
+    return render_template("top_five_rankings.html", title="Rankings", cards=top_cards)
+
+
+@app.route("/antirank/factions")
+def bot_5_factions():
+    factions = Card.query.with_entities(Card.faction).distinct().all()
+    top_cards = {}
+    for faction in factions:
+        faction = faction[0]
+        top_cards[faction] = (
+            Card.query.filter_by(faction=faction).order_by(Card.rating).limit(5).all()
+        )
     return render_template("top_five_rankings.html", title="Rankings", cards=top_cards)
 
 
