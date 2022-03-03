@@ -30,7 +30,11 @@ def randomizer():
             matches = Card.query.filter_by(faction=cardzero.faction).all()
         else:
             return randomizer()
-    cardone = sample(matches, 1)[0]
+    try:
+        cardone = sample(matches, 1)[0]
+    except Exception as e:
+        logger(cardone, e)
+        return randomizer()
     if cardone.id == cardzero.id:
         return randomizer()
     return [cardzero, cardone]
