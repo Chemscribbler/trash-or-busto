@@ -1,1 +1,1 @@
-web: flask db upgrade; web: gunicorn app:app_dzmz
+web: flask db upgrade; gunicorn app:app_dzmz
