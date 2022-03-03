@@ -1,4 +1,3 @@
-from turtle import update
 from flask import render_template, redirect, request, url_for
 from dzmz import app
 from dzmz.models import Card
