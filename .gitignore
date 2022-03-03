@@ -1,6 +1,7 @@
 venv/
 *.pyc
 __pycahche__/
+migrations
 
 instance/
 
