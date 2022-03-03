@@ -7,8 +7,8 @@ from dzmz.randomselect import randomizer
 from dzmz.scoring import update_scores
 
 
-@app.route("/index")
 @app.route("/")
+# @app.route("/index")
 def index():
     pair = randomizer()
     return render_template("index.html", pair=pair)
