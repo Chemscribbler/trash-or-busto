@@ -18,7 +18,7 @@
         <tr>
             <td>{{key}}</td>
             {% for card in value %}
-            <td>{{ card.name }}</td>
+            <td><a href="https://netrunnerdb.com/en/card/{{card.nrdb_key}}">{{card.name}}</a></td>
             {% endfor %}
         </tr>
         {% endfor %}

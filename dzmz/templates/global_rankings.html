@@ -3,9 +3,14 @@
 {% block content %}
 {%if cards %}
 <table>
+    <thead>
+        <th>Card</th>
+        <th>Elo</th>
+        <th>Number of Matches</th>
+    </thead>
     {% for card in cards %}
     <tr>
-        <td>{{card.name}}</td>
+        <td><a href="https://netrunnerdb.com/en/card/{{card.nrdb_key}}">{{card.name}}</a></td>
         <td>{{card.rating|int}}</td>
         <td>{{card.num_ratings}}</td>
     </tr>
