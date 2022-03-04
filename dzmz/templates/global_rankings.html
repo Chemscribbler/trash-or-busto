@@ -4,12 +4,14 @@
 {%if corp_cards %}
 <table style="float:left;">
     <thead>
+        <th>#</th>
         <th>Card</th>
         <th>Elo</th>
         <th>Number of<br>Matches</th>
     </thead>
     {% for card in corp_cards %}
     <tr>
+        <td>{{loop.index0+1}}</td>
         <td><a href="https://netrunnerdb.com/en/card/{{card.nrdb_key}}">{{card.name}}</a></td>
         <td>{{card.rating|int}}</td>
         <td align="center">{{card.num_ratings}}</td>
@@ -19,12 +21,14 @@
 
 <table style="float:left;">
     <thead>
+        <th>#</th>
         <th>Card</th>
         <th>Elo</th>
         <th>Number of<br>Matches</th>
     </thead>
     {% for card in runner_cards %}
     <tr>
+        <td>{{loop.index0+1}}</td>
         <td><a href="https://netrunnerdb.com/en/card/{{card.nrdb_key}}">{{card.name}}</a></td>
         <td>{{card.rating|int}}</td>
         <td align="center">{{card.num_ratings}}</td>
