@@ -1,8 +1,6 @@
-import imp
 from math import factorial
-from random import choice, sample
+from random import sample
 from dzmz.models import Card
-from dzmz import db
 from random import sample, randint
 
 
@@ -16,20 +14,17 @@ def randomizer():
             matches = Card.query.filter_by(
                 faction=cardzero.faction, type=cardzero.type
             ).all()
-    elif cardzero.rating > 1200:
+    else:
         if randint(0, 1):
             matches = Card.query.filter(
-                Card.rating >= cardzero.rating - 400, Card.faction == cardzero.faction
+                Card.rating >= cardzero.rating - 300,
+                Card.rating <= cardzero.rating + 300,
+                Card.faction == cardzero.faction,
             ).all()
         else:
             matches = Card.query.filter(
                 Card.rating >= cardzero.rating - 400, Card.side == cardzero.side
             ).all()
-    else:
-        if randint(0, 1):
-            matches = Card.query.filter_by(faction=cardzero.faction).all()
-        else:
-            return randomizer()
     try:
         cardone = sample(matches, 1)[0]
     except Exception:
