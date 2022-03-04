@@ -17,8 +17,15 @@ def index():
 @app.route("/rank")
 @app.route("/ranking")
 def ranking():
-    cards = Card.query.order_by(desc("rating")).all()
-    return render_template("global_rankings.html", title="Rankings", cards=cards)
+    corp_cards = Card.query.filter_by(side="corp").order_by(desc("rating")).all()
+    runner_cards = Card.query.filter_by(side="runner").order_by(desc("rating")).all()
+
+    return render_template(
+        "global_rankings.html",
+        title="Rankings",
+        runner_cards=runner_cards,
+        corp_cards=corp_cards,
+    )
 
 
 @app.route("/rank/faction")

@@ -1,18 +1,33 @@
 {% extends "base.html" %}
 
 {% block content %}
-{%if cards %}
-<table>
+{%if corp_cards %}
+<table style="float:left;">
     <thead>
         <th>Card</th>
         <th>Elo</th>
-        <th>Number of Matches</th>
+        <th>Number of<br>Matches</th>
     </thead>
-    {% for card in cards %}
+    {% for card in corp_cards %}
     <tr>
         <td><a href="https://netrunnerdb.com/en/card/{{card.nrdb_key}}">{{card.name}}</a></td>
         <td>{{card.rating|int}}</td>
-        <td>{{card.num_ratings}}</td>
+        <td align="center">{{card.num_ratings}}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+<table style="float:left;">
+    <thead>
+        <th>Card</th>
+        <th>Elo</th>
+        <th>Number of<br>Matches</th>
+    </thead>
+    {% for card in runner_cards %}
+    <tr>
+        <td><a href="https://netrunnerdb.com/en/card/{{card.nrdb_key}}">{{card.name}}</a></td>
+        <td>{{card.rating|int}}</td>
+        <td align="center">{{card.num_ratings}}</td>
     </tr>
     {% endfor %}
 </table>
