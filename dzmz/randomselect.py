@@ -17,13 +17,15 @@ def randomizer():
     else:
         if randint(0, 1):
             matches = Card.query.filter(
-                Card.rating >= cardzero.rating - 300,
-                Card.rating <= cardzero.rating + 300,
+                Card.rating >= cardzero.rating - 200,
+                Card.rating <= cardzero.rating + 200,
                 Card.faction == cardzero.faction,
             ).all()
         else:
             matches = Card.query.filter(
-                Card.rating >= cardzero.rating - 400, Card.side == cardzero.side
+                Card.rating >= cardzero.rating - 200,
+                Card.rating <= cardzero.rating + 200,
+                Card.side == cardzero.side,
             ).all()
     try:
         cardone = sample(matches, 1)[0]
