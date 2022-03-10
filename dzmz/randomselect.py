@@ -1,4 +1,3 @@
-from math import factorial
 from random import sample
 from dzmz.models import Card
 from random import sample, randint
@@ -17,14 +16,14 @@ def randomizer():
     else:
         if randint(0, 1):
             matches = Card.query.filter(
-                Card.rating >= cardzero.rating - 200,
-                Card.rating <= cardzero.rating + 200,
+                Card.rating >= cardzero.rating - 225,
+                Card.rating <= cardzero.rating + 225,
                 Card.faction == cardzero.faction,
             ).all()
         else:
             matches = Card.query.filter(
-                Card.rating >= cardzero.rating - 200,
-                Card.rating <= cardzero.rating + 200,
+                Card.rating >= cardzero.rating - 225,
+                Card.rating <= cardzero.rating + 225,
                 Card.side == cardzero.side,
             ).all()
     try:
