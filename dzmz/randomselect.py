@@ -6,9 +6,12 @@ from random import sample, randint
 def randomizer():
     cards = Card.query.all()
     cardzero = sample(cards, 1)[0]
+    # Low card ratings
     if cardzero.num_ratings < 10:
+        # If Identity only compare with IDs
         if cardzero.type == "identity":
             matches = Card.query.filter_by(type="identity", side=cardzero.side)
+        # Match in faction types
         else:
             matches = Card.query.filter_by(
                 faction=cardzero.faction, type=cardzero.type
@@ -32,6 +35,9 @@ def randomizer():
         return randomizer()
     if cardone.id == cardzero.id:
         return randomizer()
+    if cardzero.num_ratings > 20:
+        if randint(0, 1):
+            return randomizer()
     return [cardzero, cardone]
 
 
