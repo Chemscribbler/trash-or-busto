@@ -36,7 +36,7 @@ def randomizer():
     if cardone.id == cardzero.id:
         return randomizer()
     if cardzero.num_ratings > 20:
-        if randint(0, 1):
+        if not randint(0, 2):
             return randomizer()
     return [cardzero, cardone]
 
