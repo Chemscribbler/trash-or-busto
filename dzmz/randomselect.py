@@ -35,9 +35,10 @@ def randomizer():
         return randomizer()
     if cardone.id == cardzero.id:
         return randomizer()
-    if cardzero.num_ratings > 20:
-        if not randint(0, 2):
-            return randomizer()
+    if Card.query.filter(Card.num_ratings < 25).first():
+        if cardzero.num_ratings > 25:
+            if randint(0, 20):
+                return randomizer()
     return [cardzero, cardone]
 
 
