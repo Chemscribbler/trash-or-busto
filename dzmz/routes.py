@@ -6,6 +6,8 @@ from dzmz.randomselect import randomizer
 
 from dzmz.scoring import update_scores
 
+import json
+
 
 @app.route("/")
 # @app.route("/index")
@@ -73,3 +75,25 @@ def record_vote(cardzero_id, cardone_id):
     else:
         update_scores(ties=[cardzero, cardone])
     return redirect(url_for("index"))
+
+
+@app.route("/api/rankings")
+def api_rankings():
+    corp_cards = Card.query.filter_by(side="corp").order_by(desc("rating")).all()
+    runner_cards = Card.query.filter_by(side="runner").order_by(desc("rating")).all()
+
+    def encode_card(card: Card) -> dict[str, str]:
+        return {
+            "torb_id": card.id,
+            "nrdb_key": card.nrdb_key,
+            "name": card.name,
+            "faction": card.faction,
+            "side": card.side,
+            "rating": card.rating,
+            "num_ratings": card.num_ratings,
+        }
+
+    return {
+        "corp_cards": [encode_card(card) for card in corp_cards],
+        "runner_cards": [encode_card(card) for card in runner_cards],
+    }
