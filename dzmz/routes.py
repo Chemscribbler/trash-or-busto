@@ -82,7 +82,7 @@ def api_rankings():
     corp_cards = Card.query.filter_by(side="corp").order_by(desc("rating")).all()
     runner_cards = Card.query.filter_by(side="runner").order_by(desc("rating")).all()
 
-    def encode_card(card: Card) -> dict[str, str]:
+    def encode_card(card: Card, ranking: int) -> dict[str, str]:
         return {
             "torb_id": card.id,
             "nrdb_key": card.nrdb_key,
@@ -91,9 +91,12 @@ def api_rankings():
             "side": card.side,
             "rating": card.rating,
             "num_ratings": card.num_ratings,
+            "ranking": ranking + 1,
         }
 
     return {
-        "corp_cards": [encode_card(card) for card in corp_cards],
-        "runner_cards": [encode_card(card) for card in runner_cards],
+        "corp_cards": [encode_card(card, rank) for rank, card in enumerate(corp_cards)],
+        "runner_cards": [
+            encode_card(card, rank) for rank, card in enumerate(runner_cards)
+        ],
     }
