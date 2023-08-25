@@ -1,4 +1,5 @@
 from dzmz import db
+import requests
 
 
 class Card(db.Model):
@@ -14,6 +15,10 @@ class Card(db.Model):
 
     def __repr__(self):
         return f"<Card {self.name}>"
+    
+    def get_image_url(self):
+        r = requests.get(f"https://api-preview.netrunnerdb.com/api/v3/public/printings/{self.nrdb_key}")
+        return r.json()['data']['attributes']['images']['nrdb_classic']['large']
 
 
 class Pair(db.Model):
