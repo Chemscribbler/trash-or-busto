@@ -13,7 +13,7 @@ def build_card_db(db):
                 if card["type_code"] == "identity":
                     c = Card(
                         nrdb_key=card["code"],
-                        name=card["title"],
+                        name=fix_quotes(card["title"]),
                         faction=card["faction_code"],
                         side=card["side_code"],
                         type=card["type_code"],
@@ -21,7 +21,7 @@ def build_card_db(db):
                 elif card["type_code"] == "agenda":
                     c = Card(
                         nrdb_key=card["code"],
-                        name=card["title"],
+                        name=fix_quotes(card["title"]),
                         faction=card["faction_code"],
                         side=card["side_code"],
                         cost=card["advancement_cost"],
@@ -30,7 +30,7 @@ def build_card_db(db):
                 else:
                     c = Card(
                         nrdb_key=card["code"],
-                        name=card["title"],
+                        name=fix_quotes(card["title"]),
                         faction=card["faction_code"],
                         side=card["side_code"],
                         cost=card["cost"],
@@ -43,6 +43,12 @@ def build_card_db(db):
                 db.session.rollback()
                 update_nrdb_key(c, db=db)
                 # break
+
+
+def fix_quotes(name: str) -> str:
+    name = name.replace("“", '"')
+    name = name.replace("”", '"')
+    return name
 
 
 def update_nrdb_key(card: Card, db):
