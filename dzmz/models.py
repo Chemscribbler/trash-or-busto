@@ -12,13 +12,16 @@ class Card(db.Model):
     type = db.Column(db.String, nullable=False)
     rating = db.Column(db.Float, default=1500)
     num_ratings = db.Column(db.Integer, default=0)
+    is_duplicate = db.Column(db.Boolean, default=False)
 
     def __repr__(self):
         return f"<Card {self.name}>"
-    
+
     def get_image_url(self):
-        r = requests.get(f"https://api-preview.netrunnerdb.com/api/v3/public/printings/{self.nrdb_key}")
-        return r.json()['data']['attributes']['images']['nrdb_classic']['large']
+        r = requests.get(
+            f"https://api.netrunnerdb.com/api/v3/public/printings/{self.nrdb_key}"
+        )
+        return r.json()["data"]["attributes"]["images"]["nrdb_classic"]["large"]
 
 
 class Pair(db.Model):
