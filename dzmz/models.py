@@ -12,7 +12,6 @@ class Card(db.Model):
     type = db.Column(db.String, nullable=False)
     rating = db.Column(db.Float, default=1500)
     num_ratings = db.Column(db.Integer, default=0)
-    is_duplicate = db.Column(db.Boolean, default=False)
 
     def __repr__(self):
         return f"<Card {self.name}>"
